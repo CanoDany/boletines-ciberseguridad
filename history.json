@@ -1,0 +1,83 @@
+{
+  "CVE-2026-24858": {
+    "cve": "CVE-2026-24858",
+    "events": [
+      {
+        "fecha": "2026-01-27",
+        "titulo": "Vulnerabilidad bypass de autenticación en productos Fortinet",
+        "nivel": "**Alto**",
+        "cvss": "9.8",
+        "sector": "Tecnología"
+      }
+    ]
+  },
+  "CVE-2021-22175": {
+    "cve": "CVE-2021-22175",
+    "events": [
+      {
+        "fecha": "2026-02-18",
+        "titulo": "Vulnerabilidad SSRF en GitLab",
+        "nivel": "**Alto**  \nLa puntuación base",
+        "cvss": "6.8",
+        "sector": "Tecnología"
+      }
+    ]
+  },
+  "CVE-2026-48908": {
+    "cve": "CVE-2026-48908",
+    "events": [
+      {
+        "fecha": "2026-07-07",
+        "titulo": "Ejecución remota de código en SP Page Builder por vulnerabilidad CVE-2026-48908",
+        "nivel": "Error al generar respuesta.",
+        "cvss": "9.8",
+        "sector": "Tecnología"
+      },
+      {
+        "fecha": "2026-07-07",
+        "titulo": "Vulnerabilidad de ejecución remota de código en SP Page Builder",
+        "nivel": "Error al generar respuesta.",
+        "cvss": "9.8",
+        "sector": "Tecnología"
+      },
+      {
+        "fecha": "2026-07-07",
+        "titulo": "Ejecución remota de código en SP Page Builder por vulnerabilidad CVE-2026-48908",
+        "nivel": "Medio",
+        "cvss": "9.8",
+        "sector": "Tecnología"
+      },
+      {
+        "fecha": "2026-07-07",
+        "titulo": "Vulnerabilidad de ejecución remota de código en SP Page Builder",
+        "nivel": "Alto",
+        "cvss": "9.8",
+        "sector": "Tecnología"
+      }
+    ]
+  },
+  "CVE-2026-55255": {
+    "cve": "CVE-2026-55255",
+    "events": [
+      {
+        "fecha": "2026-07-07",
+        "titulo": "Vulnerabilidad de ejecución de flujos entre usuarios en Langflow",
+        "nivel": "Error al generar respuesta.",
+        "cvss": "8.4",
+        "sector": "Tecnología"
+      }
+    ]
+  },
+  "CVE-2026-56290": {
+    "cve": "CVE-2026-56290",
+    "events": [
+      {
+        "fecha": "2026-07-07",
+        "titulo": "Ejecución remota de código en Joomlack Page Builder por vulnerabilidad CVE-2026-56290",
+        "nivel": "Error al generar respuesta.",
+        "cvss": "9.8",
+        "sector": "Tecnología"
+      }
+    ]
+  }
+}

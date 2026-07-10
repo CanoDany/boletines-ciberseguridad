@@ -1,0 +1,39 @@
+[
+  {
+    "Titulo": "Vulnerabilidad de ejecución remota de código en SP Page Builder",
+    "CVE": "CVE-2026-48908",
+    "CVELink": "https://nvd.nist.gov/vuln/detail/CVE-2026-48908",
+    "Fecha": "2026-07-07",
+    "Vendor": "JoomShaper",
+    "Producto": "SP Page Builder",
+    "ResumenEjecutivo": "CVE-2026-48908 en SP Page Builder de JoomShaper permite RCE mediante upload HTTP remoto sin autenticación, exponiendo a la organización a compromiso total del servidor.",
+    "PuntajeCVSS": "9.8",
+    "NivelUrgencia": "Alto",
+    "TacticasMITRE": [
+      "execution",
+      "stealth"
+    ],
+    "ProcedimientosPosibles": [],
+    "CWEAsociados": [
+      "CWE-616: Incomplete Identification of Uploaded File Variables (PHP)",
+      "CWE-473: PHP External Variable Modification",
+      "CWE-646: Reliance on File Name or Extension of Externally-Supplied File"
+    ],
+    "CWELinks": [
+      "https://cwe.mitre.org/data/definitions/616.html",
+      "https://cwe.mitre.org/data/definitions/473.html",
+      "https://cwe.mitre.org/data/definitions/646.html"
+    ],
+    "CWEExplicacion": [
+      "CWE-616: Debilidad que permite procesar archivos no autorizados debido a identificación incompleta y sobrescribible de variables globales de subida en PHP.",
+      "CWE-473: Debilidad que permite comprometer la seguridad de la aplicación debido a modificación no controlada de variables PHP desde fuentes externas.",
+      "CWE-646: Debilidad que permite **procesamiento inseguro** debido a **clasificación errónea basada en nombre o extensión del archivo**."
+    ],
+    "MedidasMitigacion": [
+      "Actualizar SP Page Builder a la versión 6.6.2 o superior.",
+      "Deshabilitar temporalmente el componente SP Page Builder en Joomla si no es posible actualizar de inmediato.",
+      "Configurar el servidor web para bloquear la ejecución de archivos PHP en los directorios de medios como images y images/sppagebuilder."
+    ],
+    "Sector": "Tecnología"
+  }
+]

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Timeline {{ cve }}{% endblock %}
+{% block content %}
+<main>
+  <div class="card">
+    <h2>Timeline — {{ cve }}</h2>
+
+    {% if mensaje %}
+      <div class="success" style="display:block">{{ mensaje }}</div>
+    {% endif %}
+
+    {% if events and events|length > 0 %}
+      <div class="timeline">
+        {% for e in events %}
+        <div class="timeline-item">
+          <div class="timeline-date">{{ e.fecha }}</div>
+          <div class="timeline-bubble">
+            <div><b>Título:</b> {{ e.titulo }}</div>
+            <div><b>Nivel:</b> {{ e.nivel }}</div>
+            <div><b>CVSS:</b> {{ e.cvss }}</div>
+            <div><b>Sector:</b> {{ e.sector }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No hay eventos registrados para este CVE.</p>
+    {% endif %}
+  </div>
+</main>
+
+<style>
+.timeline { margin-top: 12px; padding-left: 20px; border-left: 3px solid var(--accent); }
+.timeline-item { margin-bottom: 16px; position: relative; }
+.timeline-date { font-weight: bold; color: var(--accent); margin-bottom: 6px; }
+.timeline-bubble {
+  background: var(--card);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+</style>
+{% endblock %}
+
+

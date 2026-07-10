@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Generador de Boletines SOC{% endblock %}
+{% block content %}
+
+<header>
+  <h1>Generador de Boletines</h1>
+
+  <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; width: 100%;">
+    
+    <!-- Generar boletines -->
+    <form method="POST" action="{{ url_for('generar_boletin_mes') }}" style="display:flex; align-items:center; gap:8px;">
+      <label for="cantidad_mes">Cantidad:</label>
+      <input type="number" id="cantidad_mes" name="cantidad" class="input"
+        value="{{ request.form.get('cantidad', 2) }}" min="1" max="20">
+      <button class="btn" type="submit">Generar boletines</button>
+    </form>
+
+    <!--Botones generales -->
+    <div style="display:flex; gap:8px;">
+      <button class="btn" onclick="window.location.href='{{ url_for('pdf_boletin') }}'" type="button">📄 Exportar PDF</button>
+      <button class="btn" onclick="window.location.href='{{ url_for('index') }}'" type="button">🔄 Refrescar</button>
+      <button class="btn" onclick="window.location.href='{{ url_for('timeline_index') }}'" type="button">📈 Ver Timeline</button>
+
+    </div>
+
+    <!-- Filtro por nivel -->
+    <form method="POST" action="{{ url_for('filtrar_y_exportar') }}" style="display:flex; align-items:center; gap:8px;">
+      <label for="nivel">Nivel:</label>
+      <select id="nivel" name="nivel" class="input">
+        <option value="Alto">Alto</option>
+        <option value="Medio">Medio</option>
+        <option value="Bajo">Bajo</option>
+      </select>
+      <button class="btn secondary" name="accion" value="filtrar" type="submit">🔍 Filtrar</button>
+      <button class="btn secondary" name="accion" value="pdf" type="submit">📄 Exportar PDF</button>
+    </form>
+
+  </div>
+</header>
+
+
+<main>
+  {% if mensaje %}
+    <div id="success-msg" class="success">{{ mensaje }}</div>
+  {% endif %}
+
+  {% if boletines and boletines|length > 0 %}
+  {% for b in boletines %}
+    <div class="card">
+      <h2>{{ b.Titulo }}</h2>
+
+      <p>
+        <b>CVE:</b>
+        <a href="{{ b.CVELink }}" target="_blank" style="color:#00b4d8; text-decoration:none;">
+          {{ b.CVE }}
+        </a>
+        &nbsp; | &nbsp;
+        <b>Fecha:</b> {{ b.Fecha }}
+      </p>
+
+      <p><b>Vendor:</b> {{ b.Vendor }} — <b>Producto:</b> {{ b.Producto }}</p>
+      <p><b>Resumen:</b> {{ b.ResumenEjecutivo }}</p>
+      <p><b>Urgencia:</b> {{ b.NivelUrgencia }} &nbsp; | &nbsp; <b>CVSS:</b> {{ b.PuntajeCVSS if b.PuntajeCVSS else 'N/A' }}</p>
+      <p><b>Sector:</b> {{ b.Sector }}</p>
+
+      {% if b.MedidasMitigacion %}
+        <p><b>Mitigaciones:</b></p>
+        <ul>
+          {% for m in b.MedidasMitigacion %}
+            <li>{{ m }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if b.CWEAsociados %}
+        <p><b>CWE Asociados:</b></p>
+        <ul>
+          {% for c in b.CWEAsociados %}
+            {% set link = (b.CWELinks[loop.index0] if b.CWELinks and loop.index0 < b.CWELinks|length else None) %}
+            <li>
+              {% if link %}
+                <a href="{{ link }}" target="_blank" style="color:#00b4d8; text-decoration:none;">
+                  {{ c }}
+                </a>
+              {% else %}
+                {{ c }}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <p><b>Tácticas MITRE:</b> {{ b.TacticasMITRE|join(', ') if b.TacticasMITRE else 'N/A' }}</p>
+    </div>
+  {% endfor %}
+
+{% else %}
+  <div class="welcome-box">
+    <div class="welcome-logos">
+      <img src="{{ url_for('static', filename='img/logo_ipn.png') }}" alt="IPN">
+      <img src="{{ url_for('static', filename='img/esime.png') }}" alt="ESIME">
+    </div>
+
+    <h2>Bienvenido al Generador de Boletines de Ciberseguridad</h2>
+
+    <p>
+      Aquí podrás generar, consultar y exportar boletines basados en vulnerabilidades relevantes.
+      Para comenzar, selecciona la cantidad y presiona <b>“Generar boletines”</b>.
+    </p>
+
+    <div class="welcome-hint">
+      Tip: también puedes filtrar por nivel (Alto/Medio/Bajo) y exportar a PDF.
+    </div>
+  </div>
+{% endif %}
+
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Timeline - CVEs{% endblock %}
+{% block content %}
+<main>
+  <div class="card">
+    <h2>Timeline — CVEs Generados</h2>
+    <p>Selecciona un CVE para ver su historial.</p>
+    <ul>
+      {% for it in items %}
+      <li style="margin-bottom:8px;">
+        <b>{{ it.CVE }}</b> — {{ it.Titulo }}
+        <small style="color:#9ca3af">({{ it.Fecha }})</small>
+        — <a href="{{ url_for('timeline_view', cve=it.CVE) }}" style="color:#00b4d8;">Ver timeline</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</main>
+{% endblock %}
